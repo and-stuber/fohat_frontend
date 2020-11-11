@@ -34,7 +34,6 @@ class LoginForm extends React.Component {
     const { fetchUserData } = this.props;
     return (
       <div className="login-form-container">
-        Login form
         <div className="form-group">
           <label htmlFor="email">Gravatar Email</label>
           <input
@@ -55,20 +54,20 @@ class LoginForm extends React.Component {
             onChange={ this.handleChange }
           />
         </div>
-        <Link
-          to='/game'
-          onClick={ () => {
-            fetchUserData(name,email);
-          }}
-        >
-          <button
-            type="button"
-            disabled={ this.checkFields() }
+          <Link
+            to='/game'
+            onClick={ () => {
+              fetchUserData(name,email);
+            }}
           >
-          Play
-          </button>
-        </Link>
-
+            <button
+              className="btn btn-success btn-login"
+              type="button"
+              disabled={ this.checkFields() }
+            >
+            Play
+            </button>
+          </Link>
       </div>
     )
   }
