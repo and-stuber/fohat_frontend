@@ -10,10 +10,12 @@ class Gameboard extends React.Component {
       stop: false,
       timer: 30,
       counter: 0,
+      randomNumber: 0,
     }
   }
 
   componentDidMount(){
+    this.random();
     const { questionFetch } = this.props;
     const miliseconds = 1000;
     questionFetch();
@@ -35,6 +37,12 @@ class Gameboard extends React.Component {
     const textArea = document.createElement('textarea');
     textArea.innerHTML = text;
     return textArea.value;
+  }
+  random() {
+    const four = 4;
+    this.setState({
+      randomNumber: Math.floor(Math.random() * (four - 0)) + 0,
+    });
   }
 
   shuffle(array) {
