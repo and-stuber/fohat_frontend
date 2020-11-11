@@ -1,11 +1,18 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchApi } from '../actions';
 class Gameboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       timer: 30,
     }
+  }
+
+  componentDidMount(){
+    const { questionFetch } = this.props;
+    questionFetch();
   }
 
   timerFunction() {
@@ -38,4 +45,15 @@ class Gameboard extends React.Component {
   }
 } 
 
-export default Gameboard;
+Gameboard.propTypes = {
+  questionFetch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  questionFetch: () => dispatch(fetchApi()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gameboard);
