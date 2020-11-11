@@ -46,9 +46,11 @@ class Gameboard extends React.Component {
             {timer > 0 ? `Time: ${timer}` : `Time's Up`}
           </span>
           <div className="question-category">
-            Category: [{ this.decodeHTML(results[counter]) }]
+            Category: [{ this.decodeHTML(results[counter].category) }]
           </div>
-          <div className="question-text">Question text</div>
+          <div className="question-text">
+          { this.decodeHTML(results[counter].question) }
+          </div>
         </div>
         <div className="answers">
           Buttons for answers
