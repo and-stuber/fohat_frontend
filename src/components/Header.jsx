@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MD5 from 'crypto-js/md5';
+import {fetchAvatar} from '../services/gravatarAPI';
 
 class Header extends React.Component {
 
   render() {
     const {name, email, score, assertions} = this.props;
-    const gravatarLink = 'https://www.gravatar.com/avatar/';
-    const emailMD5 = MD5(email);
     localStorage.setItem('state', JSON.stringify({
       player: {name, score, gravatarEmail: email, assertions},
     }));
@@ -18,8 +16,8 @@ class Header extends React.Component {
         <div className="user-info">
           <span>
             <img
-              src= { gravatarLink + emailMD5 }
-              alt="user image"
+              src= { fetchAvatar(email) }
+              alt="user"
               className="picture"
             />
           </span>
