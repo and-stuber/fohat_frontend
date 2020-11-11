@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {fetchAvatar} from '../services/gravatarAPI';
+import { fetchAvatar } from '../services/gravatarAPI';
 
 class Header extends React.Component {
 
