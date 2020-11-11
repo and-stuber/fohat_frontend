@@ -11,11 +11,11 @@ const Scoretable = (props) => {
       <span className="score-container">
         <span className="score-info">
           Your score:
-        <span className="total-score"> {score} </span>
+        <span className="total-score" data-testid="feedback-total-score"> {score} </span>
         </span>
         <span className="score-info">
           Your assertions:
-        <span className="total-score"> {asserts} </span>
+        <span className="total-score" data-testid="feedback-total-question"> {asserts} </span>
         </span>
       </span>
     )

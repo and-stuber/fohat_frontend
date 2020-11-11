@@ -92,6 +92,7 @@ class Gameboard extends React.Component {
               {this.decodeHTML(results[counter].question)}
             </div>
             <button
+              data-testid="btn-next"
               type="button"
               className="btn btn-warning mt-4"
               style={stop ? { display: 'block' } : { display: 'none' }}
@@ -128,8 +129,6 @@ class Gameboard extends React.Component {
                 { this.decodeHTML(answer)}
               </button>))])}
           </div>
-        </div>
-        <div className="next-question">
         </div>
       </div>
     )

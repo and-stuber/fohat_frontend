@@ -23,8 +23,8 @@ class Header extends React.Component {
         <span className="info player-name" data-testid="header-player-name">
           Player: {name}
         </span>
-        <span className="info player-score" data-testid="header-score">
-          Score: {score}
+        <span className="info player-score">
+          <span data-testid="header-score">Score: {score}</span>
         </span>
       </nav>
     )
