@@ -7,7 +7,7 @@ const HEADER_SCORE_SELECTOR = '[data-testid="header-score"]';
 const QUESTION_CATEGORY_SELECTOR = '[data-testid="question-category"]';
 const QUESTION_TEXT_SELECTOR = '[data-testid="question-text"]';
 const CORRECT_ALTERNATIVE_SELECTOR = '[data-testid="correct-answer"]';
-const WRONG_ALTERNATIVES_SELECTOR = '[data-testid*="wrong-answer"]';
+const WRONG_ALTERNATIVES_SELECTOR = '[data-testid="wrong-answer"]';
 const LOCAL_STORAGE_STATE_KEY = 'state';
 const BUTTON_NEXT_QUESTION_SELECTOR = '[data-testid="btn-next"]';
 
@@ -86,3 +86,27 @@ describe('[Header] Check if Header render, check if load player info', () => {
     cy.get(HEADER_SCORE_SELECTOR).contains('0');
   });
 });
+
+describe('[Game] Render game pagen and information about questions', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/');
+    cy.clearLocalStorage();
+    cy.get(INPUT_PLAYER_NAME_SELECTOR).type(name);
+    cy.get(INPUT_PLAYER_EMAIL_SELECTOR).type(email);
+    cy.get(BUTTON_PLAY_SELECTOR).click();
+  });
+
+  it('Category is present in the question', () => {
+    cy.get(QUESTION_CATEGORY_SELECTOR).should('exist');
+  });
+
+  it('Question text is in the question', () => {
+    cy.get(QUESTION_TEXT_SELECTOR).should('exist');
+  });
+
+  it('Alternatives must be shown', () => {
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).should('exist');
+    cy.get(WRONG_ALTERNATIVES_SELECTOR).should('exist');
+  });
+
+})
