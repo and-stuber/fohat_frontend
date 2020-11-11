@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Scoretable from '../../components/Scoretable';
+import Header from '../../components/Header';
 import { connect } from 'react-redux';
 
 const Scoreboard = (props) => {
   const { assertions, score } = props;
   return(
     <div>
-      Scoreboard
+      <Header />
       <Scoretable asserts={assertions} score={score} />
     </div>
   )
