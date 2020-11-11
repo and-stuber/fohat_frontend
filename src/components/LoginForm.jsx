@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -15,6 +16,14 @@ class LoginForm extends React.Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  checkFields() {
+    const { email, name } = this.state;
+    let check = true;
+    if (email !== '' && name !== '') {
+      check = false;
+    } return check;
   }
 
   render() {
@@ -42,6 +51,17 @@ class LoginForm extends React.Component {
             onChange={ this.handleChange }
           />
         </div>
+        <Link
+          to='/game'
+          onClick={"#"}
+        >
+          <button
+            type="button"
+            disabled={ this.checkFields() }
+          >
+          Play
+          </button>
+        </Link>
 
       </div>
     )
