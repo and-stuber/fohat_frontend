@@ -6,11 +6,15 @@ import './styles/Header.css';
 
 class Header extends React.Component {
 
-  render() {
+  componentDidMount() {
     const { name, email, score, assertions } = this.props;
     localStorage.setItem('state', JSON.stringify({
       player: { name, score, gravatarEmail: email, assertions },
     }));
+  }
+  
+  render() {
+    const { name, email, score } = this.props;
 
     return (
       <nav className="user-header">
