@@ -31,6 +31,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { name, email } = this.state;
+    const { fetchUserData } = this.props;
     return (
       <div className="login-form-container">
         Login form
@@ -56,7 +57,9 @@ class LoginForm extends React.Component {
         </div>
         <Link
           to='/game'
-          onClick={"#"}
+          onClick={ () => {
+            fetchUserData(name,email);
+          }}
         >
           <button
             type="button"
