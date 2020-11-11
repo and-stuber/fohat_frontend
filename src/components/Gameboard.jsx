@@ -14,8 +14,8 @@ class Gameboard extends React.Component {
 
   componentDidMount(){
     const { questionFetch } = this.props;
-    questionFetch();
     const miliseconds = 1000;
+    questionFetch();
     this.timerID = setInterval(() => this.timerFunction(), miliseconds);
   }
 
@@ -38,7 +38,12 @@ class Gameboard extends React.Component {
 
   render() {
     const { counter, timer } = this.state;
-    const { results } = this.props;
+    const { results, isFetching } = this.props;
+
+    if (isFetching) {
+      return <div className="container-game loading">Loading questions...</div>;
+    }
+
     return(
       <div className="game-container">
         <div className="question">
@@ -63,9 +68,11 @@ class Gameboard extends React.Component {
 Gameboard.propTypes = {
   questionFetch: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(Object).isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  isFetching: state.game.isFetching,
   results: state.game.results,
 });
 
