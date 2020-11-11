@@ -7,12 +7,15 @@ class Gameboard extends React.Component {
     super(props)
     this.state = {
       timer: 30,
+      counter: 0,
     }
   }
 
   componentDidMount(){
     const { questionFetch } = this.props;
     questionFetch();
+    const miliseconds = 1000;
+    this.timerID = setInterval(() => this.timerFunction(), miliseconds);
   }
 
   timerFunction() {
@@ -26,15 +29,24 @@ class Gameboard extends React.Component {
     }
   }
 
+  decodeHTML(text) {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  }
+
   render() {
-    const { timer } = this.state;
+    const { counter, timer } = this.state;
+    const { results } = this.props;
     return(
       <div className="game-container">
         <div className="question">
           <span className="timer">
             {timer > 0 ? `Time: ${timer}` : `Time's Up`}
           </span>
-          <div className="question-category">Category: </div>
+          <div className="question-category">
+            Category: [{ this.decodeHTML(results[counter]) }]
+          </div>
           <div className="question-text">Question text</div>
         </div>
         <div className="answers">
@@ -47,9 +59,11 @@ class Gameboard extends React.Component {
 
 Gameboard.propTypes = {
   questionFetch: PropTypes.func.isRequired,
+  results: PropTypes.arrayOf(Object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  results: state.game.results,
 });
 
 const mapDispatchToProps = (dispatch) => ({
