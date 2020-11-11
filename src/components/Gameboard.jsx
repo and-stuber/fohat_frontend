@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchApi } from '../actions';
+import { fetchApi, scoreFunction } from '../actions';
 class Gameboard extends React.Component {
   constructor(props) {
     super(props)
@@ -65,7 +65,7 @@ class Gameboard extends React.Component {
 
   render() {
     const { counter, timer, stop } = this.state;
-    const { results, isFetching } = this.props;
+    const { results, isFetching, scoreSum } = this.props;
 
     if (isFetching) {
       return <div className="container-game loading">Loading questions...</div>;
@@ -91,7 +91,9 @@ class Gameboard extends React.Component {
                 style={ { border: `${stop ? '3' : '0'}px solid rgb(6, 240, 15)` } }
                 type="button"
                 className="correct-answer"
-                onClick={"#"}
+                onClick={
+                  () => { scoreSum(timer, counter); this.setState({ stop: true }); }
+                }
                 disabled={ stop }
               >
                 { this.decodeHTML(results[counter].correct_answer) }
@@ -127,6 +129,7 @@ Gameboard.propTypes = {
   questionFetch: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(Object).isRequired,
   isFetching: PropTypes.bool.isRequired,
+  scoreSum: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -136,6 +139,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   questionFetch: () => dispatch(fetchApi()),
+  scoreSum: (timer, counter) => dispatch(scoreFunction(timer, counter)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gameboard);
