@@ -37,6 +37,7 @@ class LoginForm extends React.Component {
         <div className="form-group">
           <label htmlFor="email">Gravatar Email</label>
           <input
+            data-testid="input-gravatar-email"
             type="email"
             name="email"
             className="form-control"
@@ -47,6 +48,7 @@ class LoginForm extends React.Component {
         <div className="form-group">
           <label htmlFor="name">Username</label>
           <input
+            data-testid="input-player-name"
             type="text"
             name="name"
             className="form-control"
@@ -61,6 +63,7 @@ class LoginForm extends React.Component {
             }}
           >
             <button
+              data-testid="btn-play"
               className="btn btn-success btn-login"
               type="button"
               disabled={ this.checkFields() }

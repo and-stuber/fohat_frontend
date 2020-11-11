@@ -15,14 +15,15 @@ class Header extends React.Component {
     return (
       <nav className="user-header">
         <img
+          data-testid="header-profile-picture"
           src={fetchAvatar(email)}
           alt="user"
           className="picture"
         />
-        <span className="info player-name">
+        <span className="info player-name" data-testid="header-player-name">
           Player: {name}
         </span>
-        <span className="info player-score">
+        <span className="info player-score" data-testid="header-score">
           Score: {score}
         </span>
       </nav>
