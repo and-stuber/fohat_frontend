@@ -6,6 +6,8 @@ class Gameboard extends React.Component {
   constructor(props) {
     super(props)
     this.decodeHTML = this.decodeHTML.bind(this);
+    this.shuffle = this.shuffle.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
     this.state = {
       stop: false,
       timer: 30,
@@ -49,6 +51,16 @@ class Gameboard extends React.Component {
     const { randomNumber } = this.state;
     [array[0], array[randomNumber]] = [array[randomNumber], array[0]];
     return array;
+  }
+
+  nextQuestion() {
+    const { counter } = this.state;
+    this.setState({
+      stop: false,
+      counter: counter + 1,
+      timer: 30,
+    });
+    this.random();
   }
 
   render() {
@@ -101,7 +113,7 @@ class Gameboard extends React.Component {
             type="button"
             className="btn-next"
             style={ stop ? { display: 'block' } : { display: 'none' } }
-            onClick={"#"}
+            onClick={ this.nextQuestion }
           >
             Next
           </button>
