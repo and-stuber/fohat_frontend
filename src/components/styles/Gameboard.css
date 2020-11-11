@@ -1,0 +1,32 @@
+.game-container {
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  border-radius: 1%;
+  margin: 5px;
+  padding: 10px;
+  min-width: 675px;
+}
+
+.game {
+  display: inline-block;
+  width: 100%;
+}
+
+.answers {
+  width: 30%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.question {
+  width: 60%;
+  min-width: 400px;
+  text-align: justify;
+  float: left;
+  position: relative;
+}
+
+
+.btn-next {
+  width: 75px;
+}
