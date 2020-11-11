@@ -10,11 +10,13 @@ const CORRECT_ALTERNATIVE_SELECTOR = '[data-testid="correct-answer"]';
 const WRONG_ALTERNATIVES_SELECTOR = '[data-testid="wrong-answer"]';
 const LOCAL_STORAGE_STATE_KEY = 'state';
 const BUTTON_NEXT_QUESTION_SELECTOR = '[data-testid="btn-next"]';
+const FEEDBACK_TOTAL_QUESTION_SELECTOR = '[data-testid="feedback-total-question"]';
+const FEEDBACK_TOTAL_SCORE_SELECTOR = '[data-testid="feedback-total-score"]';
+const TOKEN_KEY = 'token';
 
 const name = 'Some name';
 const email = 'email@email.com';
 
-const TOKEN_KEY = 'token';
 
 describe('[Login Page] - Check if page render and user was able to fill fields', () => {
   beforeEach(() => {
@@ -108,5 +110,63 @@ describe('[Game] Render game pagen and information about questions', () => {
     cy.get(CORRECT_ALTERNATIVE_SELECTOR).should('exist');
     cy.get(WRONG_ALTERNATIVES_SELECTOR).should('exist');
   });
+});
 
+describe('[Scoreboard] Check if render and correct information was shown', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/');
+    cy.clearLocalStorage();
+    cy.get(INPUT_PLAYER_NAME_SELECTOR).type(name);
+    cy.get(INPUT_PLAYER_EMAIL_SELECTOR).type(email);
+    cy.get(BUTTON_PLAY_SELECTOR).click();
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+  });
+
+  it('Gravatar´s image was in header', () => {
+    cy.get(HEADER_IMAGE_SELECTOR).should('exist');
+  });
+
+  it('Name was in header', () => {
+    cy.get(HEADER_NAME_SELECTOR).contains(name);
+  });
+});
+
+describe('[Scoreboard] Check if score and asserts is right', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/');
+    cy.clearLocalStorage();
+    cy.get(INPUT_PLAYER_NAME_SELECTOR).type(name);
+    cy.get(INPUT_PLAYER_EMAIL_SELECTOR).type(email);
+    cy.get(BUTTON_PLAY_SELECTOR).click();
+  });
+
+  it('Asked 2 right questions, score is right', () => {
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(CORRECT_ALTERNATIVE_SELECTOR).click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(WRONG_ALTERNATIVES_SELECTOR).first().click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(WRONG_ALTERNATIVES_SELECTOR).first().click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(WRONG_ALTERNATIVES_SELECTOR).first().click();
+    cy.get(BUTTON_NEXT_QUESTION_SELECTOR).click();
+    cy.get(FEEDBACK_TOTAL_SCORE_SELECTOR).should(($el) => {
+      const state = JSON.parse(localStorage.getItem(LOCAL_STORAGE_STATE_KEY));
+      expect(parseInt($el.text())).to.be.eq(state.player.score);
+    });
+    cy.get(FEEDBACK_TOTAL_QUESTION_SELECTOR).should(($el) => {
+      const state = JSON.parse(localStorage.getItem(LOCAL_STORAGE_STATE_KEY));
+      expect(parseInt($el.text())).to.be.eq(state.player.assertions);
+    });
+  });
 })
