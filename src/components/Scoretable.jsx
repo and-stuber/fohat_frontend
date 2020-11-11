@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Scoretable = (props) => {
-  const { asserts, score } = props;
+  const { score, asserts } = props;
 
   const PlayerScore = () => {
-    return(
+    return (
       <span className="score-container">
         <span className="score-info">
-        Your score:
-        <span className="total-score"> { score } </span>
+          Your score:
+        <span className="total-score"> {score} </span>
         </span>
         <span className="score-info">
-        Your assertions:
-        <span className="total-score"> { asserts } </span>
+          Your assertions:
+        <span className="total-score"> {asserts} </span>
         </span>
       </span>
     )
@@ -24,7 +24,7 @@ const Scoretable = (props) => {
       <div className="feedback-field">
         <p className="perfect feedback">You Rule! Perfect!</p>
         <div className="score-field">
-          <Scoretable />
+          <PlayerScore />
         </div>
       </div>
     )
@@ -36,7 +36,6 @@ const Scoretable = (props) => {
         <p className="perfect feedback">You win!</p>
         <div className="score-field">
           <PlayerScore />
-          <Scoretable />
         </div>
       </div>
     )
@@ -47,25 +46,21 @@ const Scoretable = (props) => {
       <div className="feedback-field">
         <p className="perfect feedback">Sorry...</p>
         <div className="score-field">
-          <Scoretable />
+          <PlayerScore />
         </div>
       </div>
     )
   }
 
   const Feed = () => {
-    if(asserts === 5) {
-      return ( <Perfect /> )
-    }
-    if(asserts >= 3) {
-      return ( <Win /> )
-    } else {
-      return ( <Gameover />)
-    }
+    if (asserts === 5) { return (<Perfect />) }
+    if (asserts >= 3) { return (<Win />) }
+    if (asserts < 3) { return (<Gameover />) }
   }
 
-  return(
+  return (
     <div>
+      Scoreboard
       <Feed />
     </div>
   )
