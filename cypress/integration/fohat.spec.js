@@ -45,3 +45,18 @@ describe('[Login Page] - Check if page render and user was able to fill fields',
     cy.get(BUTTON_PLAY_SELECTOR).should('not.be.disabled');
   });
 });
+
+describe('[Login Page] Verify Play button function', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/');
+    cy.clearLocalStorage();
+  });
+
+  it('Save player token before game starts', () => {
+    cy.get(INPUT_PLAYER_NAME_SELECTOR).type('Some name');
+    cy.get(INPUT_PLAYER_EMAIL_SELECTOR).type('email@email.com');
+    cy.get(BUTTON_PLAY_SELECTOR).click().should(() => {
+      expect(localStorage.getItem(TOKEN_KEY)).not.to.be.null;
+    });
+  });
+});
