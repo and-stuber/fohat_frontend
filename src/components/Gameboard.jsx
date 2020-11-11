@@ -96,6 +96,16 @@ class Gameboard extends React.Component {
                 { this.decodeHTML(answer) }
               </button>))])}
         </div>
+        <div className="next-question">
+          <button
+            type="button"
+            className="btn-next"
+            style={ stop ? { display: 'block' } : { display: 'none' } }
+            onClick={"#"}
+          >
+            Next
+          </button>
+        </div>
       </div>
     )
   }
