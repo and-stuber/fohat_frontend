@@ -36,6 +36,12 @@ class Gameboard extends React.Component {
     return textArea.value;
   }
 
+  shuffle(array) {
+    const { randomNumber } = this.state;
+    [array[0], array[randomNumber]] = [array[randomNumber], array[0]];
+    return array;
+  }
+
   render() {
     const { counter, timer } = this.state;
     const { results, isFetching } = this.props;
