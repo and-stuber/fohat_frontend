@@ -2,34 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchAvatar } from '../services/gravatarAPI';
+import './styles/Header.css';
 
 class Header extends React.Component {
 
   render() {
-    const {name, email, score, assertions} = this.props;
+    const { name, email, score, assertions } = this.props;
     localStorage.setItem('state', JSON.stringify({
-      player: {name, score, gravatarEmail: email, assertions},
+      player: { name, score, gravatarEmail: email, assertions },
     }));
 
-    return(
+    return (
       <nav className="user-header">
-        <div className="user-info">
-          <span>
-            <img
-              src= { fetchAvatar(email) }
-              alt="user"
-              className="picture"
-            />
-          </span>
-            <span>
-              Player: { name }
-            </span>
-        </div>
-        <div className="user-score">
-          <span>
-            Score: { score }
-          </span>
-        </div>
+        <img
+          src={fetchAvatar(email)}
+          alt="user"
+          className="picture"
+        />
+        <span className="info player-name">
+          Player: {name}
+        </span>
+        <span className="info player-score">
+          Score: {score}
+        </span>
       </nav>
     )
   }

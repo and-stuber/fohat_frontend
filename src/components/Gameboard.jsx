@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchApi, scoreFunction } from '../actions';
 import { Redirect } from 'react-router-dom';
+import './styles/Gameboard.css';
 class Gameboard extends React.Component {
   constructor(props) {
     super(props)
@@ -17,7 +18,7 @@ class Gameboard extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.random();
     const { questionFetch } = this.props;
     const miliseconds = 1000;
@@ -77,59 +78,61 @@ class Gameboard extends React.Component {
       return <Redirect to="/scoreboard" />;
     }
 
-    return(
+    return (
       <div className="game-container">
-        <div className="question">
-          <span className="timer">
-            {timer > 0 ? `Time: ${timer}` : `Time's Up`}
-          </span>
-          <div className="question-category">
-            Category: [{ this.decodeHTML(results[counter].category) }]
+        <div className="game">
+          <div className="question">
+            <span className="timer">
+              {timer > 0 ? `Time: ${timer}` : `Time's Up`}
+            </span>
+            <div className="question-category">
+              Category: [{this.decodeHTML(results[counter].category)}]
+            </div>
+            <div className="question-text">
+              {this.decodeHTML(results[counter].question)}
+            </div>
+            <button
+              type="button"
+              className="btn btn-warning mt-4"
+              style={stop ? { display: 'block' } : { display: 'none' }}
+              onClick={this.nextQuestion}
+            >
+              Next
+          </button>
           </div>
-          <div className="question-text">
-          { this.decodeHTML(results[counter].question) }
-          </div>
-        </div>
-        <div className="answers">
-        { this.shuffle([(
+          <div className="answers">
+            {this.shuffle([(
               <button
                 key="correct"
-                style={ { border: `${stop ? '3' : '0'}px solid rgb(6, 240, 15)` } }
+                style={{ border: `${stop ? '3' : '0'}px solid rgb(6, 240, 15)` }}
                 type="button"
-                className="correct-answer"
+                className="btn btn-secondary mt-4 ml-2 mr-2"
                 onClick={
                   () => { scoreSum(timer, counter); this.setState({ stop: true }); }
                 }
-                disabled={ stop }
+                disabled={stop}
               >
-                { this.decodeHTML(results[counter].correct_answer) }
+                { this.decodeHTML(results[counter].correct_answer)}
               </button>),
             ...results[counter].incorrect_answers.map((answer, index) => (
               <button
-                key={ `incorrect-${index}` }
-                style={ { border: `${stop ? '3' : '0'}px solid rgb(255, 0, 0)` } }
+                key={`incorrect-${index}`}
+                style={{ border: `${stop ? '3' : '0'}px solid rgb(255, 0, 0)` }}
                 type="button"
-                className="wrong-answer"
-                onClick={ () => { this.setState({ stop: true }); } }
-                disabled={ stop }
+                className="btn btn-secondary mt-4 ml-2 mr-2"
+                onClick={() => { this.setState({ stop: true }); }}
+                disabled={stop}
               >
-                { this.decodeHTML(answer) }
+                { this.decodeHTML(answer)}
               </button>))])}
+          </div>
         </div>
         <div className="next-question">
-          <button
-            type="button"
-            className="btn-next"
-            style={ stop ? { display: 'block' } : { display: 'none' } }
-            onClick={ this.nextQuestion }
-          >
-            Next
-          </button>
         </div>
       </div>
     )
   }
-} 
+}
 
 Gameboard.propTypes = {
   questionFetch: PropTypes.func.isRequired,
