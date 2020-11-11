@@ -5,6 +5,7 @@ import { fetchApi } from '../actions';
 class Gameboard extends React.Component {
   constructor(props) {
     super(props)
+    this.decodeHTML = this.decodeHTML.bind(this);
     this.state = {
       timer: 30,
       counter: 0,
