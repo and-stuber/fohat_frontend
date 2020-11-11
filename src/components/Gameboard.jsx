@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchApi, scoreFunction } from '../actions';
+import { Redirect } from 'react-router-dom';
 class Gameboard extends React.Component {
   constructor(props) {
     super(props)
@@ -69,6 +70,11 @@ class Gameboard extends React.Component {
 
     if (isFetching) {
       return <div className="container-game loading">Loading questions...</div>;
+    }
+
+    const questionAmount = 5;
+    if (counter === questionAmount) {
+      return <Redirect to="/scoreboard" />;
     }
 
     return(
