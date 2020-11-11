@@ -1,0 +1,29 @@
+.feedback-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+}
+
+.feedback {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.perfect {
+  background: linear-gradient(90deg, rgba(255,77,0,1) 0%, rgba(104,70,120,1) 56%, rgba(68,68,149,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.score-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 40px;
+}
+
+.again {
+  margin: 10px;
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles/Scoretable.css';
+import BtnPlayAgain from './BtnPlayAgain';
 
 const Scoretable = (props) => {
   const { score, asserts } = props;
@@ -33,7 +35,7 @@ const Scoretable = (props) => {
   const Win = () => {
     return (
       <div className="feedback-field">
-        <p className="perfect feedback">You win!</p>
+        <p className="win feedback">You win!</p>
         <div className="score-field">
           <PlayerScore />
         </div>
@@ -44,7 +46,7 @@ const Scoretable = (props) => {
   const Gameover = () => {
     return (
       <div className="feedback-field">
-        <p className="perfect feedback">Sorry...</p>
+        <p className="gameover feedback">Sorry...</p>
         <div className="score-field">
           <PlayerScore />
         </div>
@@ -60,8 +62,8 @@ const Scoretable = (props) => {
 
   return (
     <div>
-      Scoreboard
       <Feed />
+      <BtnPlayAgain />
     </div>
   )
 }
