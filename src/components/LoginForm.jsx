@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { enterUser } from '../actions';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -68,4 +71,12 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+const mapDispatchtoProps = (dispatch) => ({
+  fetchUserData: (name, email) => dispatch(enterUser(name, email)),
+})
+
+LoginForm.propTypes = {
+  fetchUserData: PropTypes.func.isRequired,
+}
+
+export default connect(null, mapDispatchtoProps)(LoginForm);
