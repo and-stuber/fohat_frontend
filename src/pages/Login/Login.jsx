@@ -6,8 +6,14 @@ import './Login.css';
 const Login = () => {
   return (
     <div className="login-page">
-      <img className="logo" src={ logo } />
+      <img className="logo" src={logo} />
       <LoginForm />
+      <div className="gravatar">
+        Need account?<br/>
+        <a href="https://br.gravatar.com/" target="_blank">
+          https://br.gravatar.com/
+        </a>
+      </div>
     </div>
   )
 }
