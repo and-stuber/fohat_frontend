@@ -11,7 +11,7 @@ ref: https://opentdb.com/
 Open a new terminal in main folder of project and run comando `npm install`
 After finish, run `npm start`.
 
-For check Cypress tests, run `npx cypress open` or simply run `cypress run -b chrome` for a browser window.
+For check Cypress tests, run `npx cypress open` or simply run `npx cypress run -b chrome` for a browser window.
 
 #### Brief description of the work environment used to run this project (computer/operating system, text editor/IDE, libraries, etc).
 
