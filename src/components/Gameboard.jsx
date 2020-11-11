@@ -85,10 +85,10 @@ class Gameboard extends React.Component {
             <span className="timer">
               {timer > 0 ? `Time: ${timer}` : `Time's Up`}
             </span>
-            <div className="question-category">
+            <div className="question-category" data-testid="question-category">
               Category: [{this.decodeHTML(results[counter].category)}]
             </div>
-            <div className="question-text">
+            <div className="question-text" data-testid="question-text">
               {this.decodeHTML(results[counter].question)}
             </div>
             <button
@@ -103,6 +103,7 @@ class Gameboard extends React.Component {
           <div className="answers">
             {this.shuffle([(
               <button
+                data-testid="correct-answer"
                 key="correct"
                 style={{ border: `${stop ? '3' : '0'}px solid rgb(6, 240, 15)` }}
                 type="button"
@@ -116,6 +117,7 @@ class Gameboard extends React.Component {
               </button>),
             ...results[counter].incorrect_answers.map((answer, index) => (
               <button
+                data-testid="wrong-answer"
                 key={`incorrect-${index}`}
                 style={{ border: `${stop ? '3' : '0'}px solid rgb(255, 0, 0)` }}
                 type="button"
