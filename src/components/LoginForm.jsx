@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
       <div className="login-form-container">
         Login form
         <div className="form-group">
-          <label htmlFor="Email">Gravatar Email</label>
+          <label htmlFor="email">Gravatar Email</label>
           <input
             type="email"
             name="email"
@@ -32,6 +32,17 @@ class LoginForm extends React.Component {
             onChange={ this.handleChange }
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="name">Username</label>
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            value={name}
+            onChange={ this.handleChange }
+          />
+        </div>
+
       </div>
     )
   }
