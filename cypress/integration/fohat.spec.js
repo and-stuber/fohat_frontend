@@ -11,6 +11,9 @@ const WRONG_ALTERNATIVES_SELECTOR = '[data-testid*="wrong-answer"]';
 const LOCAL_STORAGE_STATE_KEY = 'state';
 const BUTTON_NEXT_QUESTION_SELECTOR = '[data-testid="btn-next"]';
 
+const name = 'Some name';
+const email = 'email@email.com';
+
 const TOKEN_KEY = 'token';
 
 describe('[Login Page] - Check if page render and user was able to fill fields', () => {
@@ -58,5 +61,28 @@ describe('[Login Page] Verify Play button function', () => {
     cy.get(BUTTON_PLAY_SELECTOR).click().should(() => {
       expect(localStorage.getItem(TOKEN_KEY)).not.to.be.null;
     });
+  });
+});
+
+describe('[Header] Check if Header render, check if load player info', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/');
+    cy.clearLocalStorage();
+    cy.get(INPUT_PLAYER_NAME_SELECTOR).type(name);
+    cy.get(INPUT_PLAYER_EMAIL_SELECTOR).type(email);
+    cy.get(BUTTON_PLAY_SELECTOR).click();
+    cy.get(HEADER_NAME_SELECTOR);
+  });
+
+  it('Gravatar Player´s show in header', () => {
+    cy.get(HEADER_IMAGE_SELECTOR).should('exist');
+  });
+
+  it('Player´s name show in header', () => {
+    cy.get(HEADER_NAME_SELECTOR).contains(name);
+  });
+
+  it('Player´s score was 0, and present header', () => {
+    cy.get(HEADER_SCORE_SELECTOR).contains('0');
   });
 });
