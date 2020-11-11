@@ -30,11 +30,43 @@ const Scoretable = (props) => {
     )
   }
 
+  const Win = () => {
+    return (
+      <div className="feedback-field">
+        <p className="perfect feedback">You win!</p>
+        <div className="score-field">
+          <PlayerScore />
+          <Scoretable />
+        </div>
+      </div>
+    )
+  }
 
+  const Gameover = () => {
+    return (
+      <div className="feedback-field">
+        <p className="perfect feedback">Sorry...</p>
+        <div className="score-field">
+          <Scoretable />
+        </div>
+      </div>
+    )
+  }
+
+  const Feed = () => {
+    if(asserts === 5) {
+      return ( <Perfect /> )
+    }
+    if(asserts >= 3) {
+      return ( <Win /> )
+    } else {
+      return ( <Gameover />)
+    }
+  }
 
   return(
     <div>
-      Score here
+      <Feed />
     </div>
   )
 }
