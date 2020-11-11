@@ -7,6 +7,7 @@ class Gameboard extends React.Component {
     super(props)
     this.decodeHTML = this.decodeHTML.bind(this);
     this.state = {
+      stop: false,
       timer: 30,
       counter: 0,
     }
@@ -43,7 +44,7 @@ class Gameboard extends React.Component {
   }
 
   render() {
-    const { counter, timer } = this.state;
+    const { counter, timer, stop } = this.state;
     const { results, isFetching } = this.props;
 
     if (isFetching) {
@@ -64,7 +65,28 @@ class Gameboard extends React.Component {
           </div>
         </div>
         <div className="answers">
-          Buttons for answers
+        { this.shuffle([(
+              <button
+                key="correct"
+                style={ { border: `${stop ? '3' : '0'}px solid rgb(6, 240, 15)` } }
+                type="button"
+                className="correct-answer"
+                onClick={"#"}
+                disabled={ stop }
+              >
+                { this.decodeHTML(results[counter].correct_answer) }
+              </button>),
+            ...results[counter].incorrect_answers.map((answer, index) => (
+              <button
+                key={ `incorrect-${index}` }
+                style={ { border: `${stop ? '3' : '0'}px solid rgb(255, 0, 0)` } }
+                type="button"
+                className="wrong-answer"
+                onClick={ () => { this.setState({ stop: true }); } }
+                disabled={ stop }
+              >
+                { this.decodeHTML(answer) }
+              </button>))])}
         </div>
       </div>
     )
